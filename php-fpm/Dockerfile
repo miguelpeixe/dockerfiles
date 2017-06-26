@@ -41,4 +41,3 @@ RUN { \
 	} > /usr/local/etc/php/conf.d/opcache-recommended.ini
 
 VOLUME /var/www/html
-COPY nginx.conf /etc/nginx/nginx.conf
