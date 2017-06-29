@@ -50,7 +50,7 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 		--with-compat \
 		--with-file-aio \
 		--with-http_v2_module \
-    --add-module=/usr/src/ngx_cache_purge-$NGINX_CACHE_PURGE_VERSION \
+		--add-module=/usr/src/ngx_cache_purge-$NGINX_CACHE_PURGE_VERSION \
 	" \
 	&& addgroup -S nginx \
 	&& adduser -D -S -h /var/cache/nginx -s /sbin/nologin -G nginx nginx \
@@ -84,13 +84,13 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 	gpg --batch --verify nginx.tar.gz.asc nginx.tar.gz \
 	&& rm -r "$GNUPGHOME" nginx.tar.gz.asc \
 	&& mkdir -p /usr/src \
-  \
-  # Download custom modules
-  && curl -fSL http://labs.frickle.com/files/ngx_cache_purge-$NGINX_CACHE_PURGE_VERSION.tar.gz -o ngx_cache_purge.tar.gz \
-  && tar -zxC /usr/src -f ngx_cache_purge.tar.gz \
-  && rm ngx_cache_purge.tar.gz \
-  \
-  # Back to nginx setup
+	\
+	# Download custom modules
+	&& curl -fSL http://labs.frickle.com/files/ngx_cache_purge-$NGINX_CACHE_PURGE_VERSION.tar.gz -o ngx_cache_purge.tar.gz \
+	&& tar -zxC /usr/src -f ngx_cache_purge.tar.gz \
+	&& rm ngx_cache_purge.tar.gz \
+	\
+	# Back to nginx setup
 	&& tar -zxC /usr/src -f nginx.tar.gz \
 	&& rm nginx.tar.gz \
 	&& cd /usr/src/nginx-$NGINX_VERSION \
